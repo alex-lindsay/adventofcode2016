@@ -8,6 +8,9 @@ orientation = 90
 x = 0
 y = 0
 
+visitedLocations = []
+answer2 = False
+
 for instruction in instructions:
     print x, y, orientation, instruction
     turn = instruction[0]
@@ -24,7 +27,17 @@ for instruction in instructions:
     if orientation == 270:
         y -= distance
 
+    if not answer2:
+        try:
+            visitedLocations.index((x, y))
+            answer2 = "Day 1 second answer is: (%d, %d) %d" % (x, y, x + y)
+        except ValueError:
+            visitedLocations.append((x, y))
+
+    print visitedLocations
     print instruction, orientation, x, y
     print
 
+
 print "Day 1 answer is: %d " % (x + y)
+print answer2
