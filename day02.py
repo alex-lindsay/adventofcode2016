@@ -15,23 +15,32 @@ directions = {
     "R": ( 1,  0)
 }
 
+keys = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"]
+]
+
 def indexToButton(index):
     x, y = index
-    if (x < 0) or (x > 2) or (y < 0) or (y > 2):
+    if (y < 0) or (y > (len(keys)-1)) or (x < 0) or (x > (len(keys[y])-1)):
+        return None
+    elif keys[y][x] == '*':
         return None
     else:
-        return str((y * 3) + x + 1)
+        return keys[y][x]
 
 def processInstruction(instruction, index):
     output = ""
     if ord(instruction) == 10:
         output = indexToButton(index)
     if instruction in directions:
-        x = index[0] + directions[instruction][0]
-        y = index[1] + directions[instruction][1]
-        x = max(0, min(2, x))
-        y = max(0, min(2, y))
-        index = (x, y)
+        if indexToButton(index):
+            x = index[0] + directions[instruction][0]
+            y = index[1] + directions[instruction][1]
+            x = max(0, min(2, x))
+            y = max(0, min(2, y))
+            index = (x, y)
     return (output, index)
 
 def processInput(input):
