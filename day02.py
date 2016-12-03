@@ -15,10 +15,18 @@ directions = {
     "R": ( 1,  0)
 }
 
+# keys = [
+#     ["1", "2", "3"],
+#     ["4", "5", "6"],
+#     ["7", "8", "9"]
+# ]
+
 keys = [
-    ["1", "2", "3"],
-    ["4", "5", "6"],
-    ["7", "8", "9"]
+    ["*", "*", "1", "*", "*"],
+    ["*", "2", "3", "4", "*"],
+    ["5", "6", "7", "8", "9"],
+    ["*", "A", "B", "C", "*"],
+    ["*", "*", "D", "*", "*"]
 ]
 
 def indexToButton(index):
@@ -35,24 +43,24 @@ def processInstruction(instruction, index):
     if ord(instruction) == 10:
         output = indexToButton(index)
     if instruction in directions:
-        if indexToButton(index):
-            x = index[0] + directions[instruction][0]
-            y = index[1] + directions[instruction][1]
-            x = max(0, min(2, x))
-            y = max(0, min(2, y))
+        x = index[0] + directions[instruction][0]
+        y = index[1] + directions[instruction][1]
+        if indexToButton((x, y)):
             index = (x, y)
     return (output, index)
 
-def processInput(input):
-    index = (1, 1)
+def processInput(input, index):
     result = ""
+    output = None
     for char in input:
+        print '>', index, char, output
         (output, index) = processInstruction(char, index)
-        print char, ord(char), output, index
         if output:
             result += output
+        print '<', output, index, result
 
     result += indexToButton(index)
     return result
 
-print processInput(input)
+# print processInput(input, (1, 1))
+print processInput(input, (0, 2))
