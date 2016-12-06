@@ -1,26 +1,31 @@
 from collections import Counter
 
-input = """eedadn
-drvtee
-eandsr
-raavrd
-atevrs
-tsrnev
-sdttsa
-rasrtv
-nssdts
-ntnada
-svetve
-tesnvt
-vntsnd
-vrdear
-dvrsen
-enarar"""
+# input = """eedadn
+# drvtee
+# eandsr
+# raavrd
+# atevrs
+# tsrnev
+# sdttsa
+# rasrtv
+# nssdts
+# ntnada
+# svetve
+# tesnvt
+# vntsnd
+# vrdear
+# dvrsen
+# enarar"""
+
+inputFile = 'day06_input.txt'
+inputF = open(inputFile, 'r')
+input = inputF.read()
 
 instructions = input.split("\n")
-# print instructions
+instructions = instructions[:-1]
+print instructions
 positions = []
-for i in range(6):
+for i in range(len(instructions[0])):
     positions.append(Counter([instruction[i] for instruction in instructions]).most_common(1))
 
 print positions
