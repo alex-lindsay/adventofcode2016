@@ -26,7 +26,7 @@ instructions = instructions[:-1]
 print instructions
 positions = []
 for i in range(len(instructions[0])):
-    positions.append(Counter([instruction[i] for instruction in instructions]).most_common(1))
+    positions.append(Counter([instruction[i] for instruction in instructions]).most_common()[-1])
 
 print positions
 print ''.join([item[0][0] for item in positions])
